@@ -23,34 +23,34 @@ const routes: RouteRecordRaw[] = [
           ],
         },
       },
-      // {
-      //   path: 'robots',
-      //   children: [
-      //     {
-      //       path: '',
-      //       name: 'robots',
-      //       component: () => {},
-      //       meta: {
-      //         title: 'Robots',
-      //         breadcrumbs: [
-      //           { name: 'Robots' },
-      //         ],
-      //       },
-      //     },
-      //     {
-      //       path: ':id',
-      //       name: 'robot-details',
-      //       component: () => {},
-      //       meta: {
-      //         title: 'Robot Details',
-      //         breadcrumbs: [
-      //           { name: 'Robots', to: '/robots' },
-      //           { name: 'Robot Details' },
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        path: 'robots',
+        children: [
+          {
+            path: '',
+            name: 'robots',
+            component: () => import('@/views/Robots.vue'),
+            meta: {
+              title: 'Robots',
+              breadcrumbs: [
+                { name: 'Robots' },
+              ],
+            },
+          },
+          //     {
+          //       path: ':id',
+          //       name: 'robot-details',
+          //       component: () => {},
+          //       meta: {
+          //         title: 'Robot Details',
+          //         breadcrumbs: [
+          //           { name: 'Robots', to: '/robots' },
+          //           { name: 'Robot Details' },
+          //         ],
+          //       },
+          //     },
+        ],
+      },
     ],
   },
   {

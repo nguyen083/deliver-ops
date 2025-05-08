@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { Location } from '@/types/location'
+import type { Robot } from '@/types/robot'
 import type { Table } from '@tanstack/vue-table'
-import CreateLocationDialog from '@/components/app/locations/CreateLocationDialog.vue'
-import { columns } from '@/components/app/locations/locations-table/columns'
+import CreateRobotDialog from '@/components/app/robots/CreateRobotDialog.vue'
+import { columns } from '@/components/app/robots/robots-table/columns'
 import DataTable from '@/components/shared/DataTable.vue'
 import DataTableColumnVisibility from '@/components/shared/DataTableColumnVisibility.vue'
 import PageContainer from '@/components/shared/PageContainer.vue'
 import { Button } from '@/components/ui/button'
-import { useListLocationsQuery } from '@/composables/use-location'
+import { useListRobotsQuery } from '@/composables/use-robot'
 import { AlertCircle, Loader, RefreshCw } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
-const tableRef = useTemplateRef<{ table: Table<Location> } | null>('table')
+const tableRef = useTemplateRef<{ table: Table<Robot> } | null>('table')
 
 const page = ref(Number(route.query.page) || 1)
 const pageSize = ref(Number(route.query.pageSize) || 10)
 
-const { data, isPending, isFetching, isError, error, refetch } = useListLocationsQuery(page, pageSize)
+const { data, isPending, isFetching, isError, error, refetch } = useListRobotsQuery(page, pageSize)
 
 function handlePageChange(p: number) {
   page.value = p
@@ -38,7 +38,7 @@ function handlePageSizeChange(ps: number) {
         <Loader class="w-8 h-8 animate-spin text-muted-foreground" />
       </div>
       <p class="text-lg text-muted-foreground">
-        Loading locations...
+        Loading robots...
       </p>
     </div>
 
@@ -47,7 +47,7 @@ function handlePageSizeChange(ps: number) {
         <AlertCircle class="w-8 h-8" />
         <div class="space-y-2 text-center">
           <h2 class="text-lg font-semibold">
-            Failed to load locations
+            Failed to load robots
           </h2>
           <p class="text-sm text-muted-foreground">
             {{ error?.message || 'An unexpected error occurred' }}
@@ -61,10 +61,10 @@ function handlePageSizeChange(ps: number) {
         <AlertCircle class="w-8 h-8 text-muted-foreground" />
         <div class="space-y-2 text-center">
           <h2 class="text-lg font-semibold">
-            No locations found
+            No robots found
           </h2>
           <p class="text-sm text-muted-foreground">
-            There are no locations to display
+            There are no robots to display
           </p>
         </div>
       </div>
@@ -74,14 +74,14 @@ function handlePageSizeChange(ps: number) {
       <div class="flex items-center justify-between mb-6">
         <div>
           <h1 class="text-xl font-semibold">
-            Locations
+            Robots
           </h1>
           <p class="text-sm text-muted-foreground">
-            View and manage your locations
+            View and manage your robots
           </p>
         </div>
         <div class="flex items-center gap-2">
-          <CreateLocationDialog />
+          <CreateRobotDialog />
           <Button
             variant="outline"
             :disabled="isFetching"
